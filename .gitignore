@@ -198,3 +198,4 @@ public/
 
 ## RECURSI CONFIGS
 dist
+examples/**/package-lock.json
