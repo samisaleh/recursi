@@ -4,6 +4,7 @@ import { executeSystemCommand } from '../utils/runner';
 interface AuditOptions {
     auditLevel: string;
     excludes: string[];
+    fix: boolean;
     startDir?: string;
 }
 
@@ -23,13 +24,19 @@ const checkIfLevelFound = function(errors: string, auditLevel: string) {
     });
 };
 
-export const audit = function({ auditLevel, excludes, startDir }: AuditOptions): void {
+export const audit = function({ auditLevel, excludes, fix, startDir }: AuditOptions): void {
     const directories = findPackageDirectories(startDir, excludes);
+    const fixCommand = (fix && 'fix') || '';
 
     directories.forEach(function(directory) {
-        const command = `cd ${directory} && npm audit --parseable`;
+        const command = `cd ${directory} && npm audit --parseable ${fixCommand}`;
+
         console.log(`Auditing directory ${directory}`);
         const hasError = executeSystemCommand(command);
+
+        if (hasError && fix) {
+            throw new Error(hasError);
+        }
 
         if (hasError) {
             checkIfLevelFound(hasError, auditLevel);

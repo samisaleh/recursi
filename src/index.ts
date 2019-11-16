@@ -13,10 +13,11 @@ program
     .command('audit')
     .option('--audit-level <level>', 'the max level to allow without exiting in error', 'high')
     .option('--exclude <dirs>', 'comma separated list of directories to exclude')
+    .option('--fix', 'attempt to automatically fix errors', false)
     .option('--start-dir <level>', 'the directory to start in')
-    .action(function({ auditLevel, exclude, startDir }: Command) {
+    .action(function({ auditLevel, exclude, fix, startDir }: Command) {
         const excludes = parseExcludes(exclude);
-        audit({ auditLevel, excludes, startDir });
+        audit({ auditLevel, excludes, fix, startDir });
     });
 
 // INSTALL
