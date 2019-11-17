@@ -23,11 +23,12 @@ program
 // INSTALL
 program
     .command('install')
+    .option('--clean', 'removes package locks and node modules before installing')
     .option('--exclude <dirs>', 'comma separated list of directories to exclude')
     .option('--start-dir <level>', 'the directory to start in')
-    .action(function({ exclude, startDir }: Command) {
+    .action(function({ clean, exclude, startDir }: Command) {
         const excludes = parseExcludes(exclude);
-        install({ excludes, startDir });
+        install({ clean, excludes, startDir });
     });
 
 program.parse(process.argv);
