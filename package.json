@@ -1,11 +1,11 @@
 {
   "name": "recursi",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "lint": "eslint **/*.ts --fix",
-    "set-version": "npm version patch && node ./build/set-version.js",
+    "set-version": "node ./build/set-version.js",
     "watch": "tsc -w"
   },
   "repository": {
