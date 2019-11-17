@@ -8,7 +8,7 @@ program.version(version);
 console.log(`Recursi version ${version}\n`);
 
 const parseExcludes = function(exclude: string): string[] {
-    return exclude?.split(',').map((exclusion: string) => exclusion.trim()) || [];
+    return exclude?.split(',').map((exclusion: string): string => exclusion.trim()) || [];
 };
 
 export interface BaseOptions {

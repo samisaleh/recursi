@@ -9,7 +9,7 @@ interface AuditOptions extends BaseOptions {
 
 const auditLevels: string[] = ['low', 'moderate', 'high', 'critical'];
 
-const checkIfLevelFound = function(errors: string, auditLevel: string) {
+const checkIfLevelFound = function(errors: string, auditLevel: string): void {
     const levelIndex = auditLevels.indexOf(auditLevel);
     const errorLevels = auditLevels.filter((level, index) => index >= levelIndex);
 
