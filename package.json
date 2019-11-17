@@ -2,7 +2,6 @@
   "name": "recursi",
   "version": "0.1.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
     "lint": "eslint **/*.ts --fix",
     "set-version": "node ./build/set-version.js",
@@ -46,5 +45,8 @@
     "commander": "4.0.1",
     "fast-glob": "3.1.0",
     "rimraf": "3.0.0"
+  },
+  "bin": {
+    "recursi": "dist/cli.js"
   }
 }

@@ -1,7 +1,7 @@
 import { findPackageDirectories } from '../utils/package-locator';
 import { executeSystemCommand } from '../utils/runner';
 import rimraf from 'rimraf';
-import { BaseOptions } from '..';
+import { BaseOptions } from '../cli';
 
 interface InstallOptions extends BaseOptions {
     clean: boolean;

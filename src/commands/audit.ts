@@ -1,6 +1,6 @@
 import { findPackageDirectories } from '../utils/package-locator';
 import { executeSystemCommand } from '../utils/runner';
-import { BaseOptions } from '../';
+import { BaseOptions } from '../cli';
 
 interface AuditOptions extends BaseOptions {
     auditLevel: string;

@@ -1,8 +1,11 @@
+#!/usr/bin/env node
 import program, { Command } from 'commander';
 import { version } from './app-version.json';
 import { audit, install } from './commands';
 
 program.version(version);
+
+console.log(`Recursi version ${version}\n`);
 
 const parseExcludes = function(exclude: string): string[] {
     return exclude?.split(',').map((exclusion: string) => exclusion.trim()) || [];
@@ -16,7 +19,7 @@ export interface BaseOptions {
 const setBaseOptions = function(programInstance: Command): void {
     programInstance
         .option('--exclude <dirs>', 'comma separated list of directories to exclude')
-        .option('--start-dir <level>', 'the directory to start in');
+        .option('--start-dir <dir>', 'the directory to start in');
 };
 
 // AUDIT
