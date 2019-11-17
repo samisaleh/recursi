@@ -1,11 +1,10 @@
 import { findPackageDirectories } from '../utils/package-locator';
 import { executeSystemCommand } from '../utils/runner';
 import rimraf from 'rimraf';
+import { BaseOptions } from '..';
 
-interface InstallOptions {
+interface InstallOptions extends BaseOptions {
     clean: boolean;
-    excludes: string[];
-    startDir?: string;
 }
 
 const cleanLocation = function(location: string): void {
@@ -20,12 +19,12 @@ export const install = function({ clean = false, excludes, startDir }: InstallOp
 
     directories.forEach(function(directory) {
         if (clean) {
-            console.log(`Removing existing package lock and modules in ${directory}`);
+            console.log(`Removing existing package lock and modules in ${directory || '/'}`);
             cleanLocation(directory);
         }
 
         const command = `cd ${directory} && npm i`;
-        console.log(`Installing packages in directory ${directory}`);
+        console.log(`Installing packages in directory ${directory || '/'}`);
         const hasError = executeSystemCommand(command, false);
         if (hasError) {
             throw new Error(hasError);

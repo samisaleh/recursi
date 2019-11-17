@@ -1,14 +1,13 @@
 import { findPackageDirectories } from '../utils/package-locator';
 import { executeSystemCommand } from '../utils/runner';
+import { BaseOptions } from '../';
 
-interface AuditOptions {
+interface AuditOptions extends BaseOptions {
     auditLevel: string;
-    excludes: string[];
     fix: boolean;
-    startDir?: string;
 }
 
-const auditLevels = ['low', 'moderate', 'high', 'critical'];
+const auditLevels: string[] = ['low', 'moderate', 'high', 'critical'];
 
 const checkIfLevelFound = function(errors: string, auditLevel: string) {
     const levelIndex = auditLevels.indexOf(auditLevel);
@@ -31,7 +30,7 @@ export const audit = function({ auditLevel, excludes, fix, startDir }: AuditOpti
     directories.forEach(function(directory) {
         const command = `cd ${directory} && npm audit --parseable ${fixCommand}`;
 
-        console.log(`Auditing directory ${directory}`);
+        console.log(`Auditing directory ${directory || '/'}`);
         const hasError = executeSystemCommand(command);
 
         if (hasError && fix) {

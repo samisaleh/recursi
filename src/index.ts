@@ -8,27 +8,40 @@ const parseExcludes = function(exclude: string): string[] {
     return exclude?.split(',').map((exclusion: string) => exclusion.trim()) || [];
 };
 
+export interface BaseOptions {
+    excludes: string[];
+    startDir?: string;
+}
+
+const setBaseOptions = function(programInstance: Command): void {
+    programInstance
+        .option('--exclude <dirs>', 'comma separated list of directories to exclude')
+        .option('--start-dir <level>', 'the directory to start in');
+};
+
 // AUDIT
-program
+const auditCommand = program
     .command('audit')
-    .option('--audit-level <level>', 'the max level to allow without exiting in error', 'high')
-    .option('--exclude <dirs>', 'comma separated list of directories to exclude')
+    .description('recursive audit with the ability to set the max audit level error')
+    .option('--audit-level <level>', 'the max level to allow before exiting in error', 'high')
     .option('--fix', 'attempt to automatically fix errors', false)
-    .option('--start-dir <level>', 'the directory to start in')
     .action(function({ auditLevel, exclude, fix, startDir }: Command) {
         const excludes = parseExcludes(exclude);
         audit({ auditLevel, excludes, fix, startDir });
     });
 
+setBaseOptions(auditCommand);
+
 // INSTALL
-program
+const installCommand = program
     .command('install')
+    .description('recursive install with added options to purge dependencies before installing')
     .option('--clean', 'removes package locks and node modules before installing')
-    .option('--exclude <dirs>', 'comma separated list of directories to exclude')
-    .option('--start-dir <level>', 'the directory to start in')
     .action(function({ clean, exclude, startDir }: Command) {
         const excludes = parseExcludes(exclude);
         install({ clean, excludes, startDir });
     });
+
+setBaseOptions(installCommand);
 
 program.parse(process.argv);
