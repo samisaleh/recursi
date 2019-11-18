@@ -22,7 +22,6 @@ const setBaseOptions = function(programInstance: Command): void {
         .option('--start-dir <dir>', 'the directory to start in');
 };
 
-// AUDIT
 const auditCommand = program
     .command('audit')
     .description('recursive audit with the ability to set the max audit level error')
@@ -35,7 +34,6 @@ const auditCommand = program
 
 setBaseOptions(auditCommand);
 
-// INSTALL
 const installCommand = program
     .command('install')
     .description('recursive install with added options to purge dependencies before installing')
@@ -47,7 +45,6 @@ const installCommand = program
 
 setBaseOptions(installCommand);
 
-// INSTALL
 const versionCommand = program
     .command('version')
     .description('recursively sets the version of all the package files it finds')
