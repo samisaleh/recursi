@@ -14,6 +14,7 @@ Note: this tool is not currently published - to use install the source run `npm 
 | --fix | attempt to automatically fix errors (default: false) |  
 | --exclude \<dirs\> | comma separated list of directories to exclude |  
 | --start-dir \<dir\> | the directory to start in |  
+| -h, --help | output usage information |  
 
 ### Install
 
@@ -24,9 +25,21 @@ Note: this tool is not currently published - to use install the source run `npm 
 | --clean | removes package locks and node modules before installing |
 | --exclude \<dirs\> | comma separated list of directories to exclude |  
 | --start-dir \<dir\> | the directory to start in |  
+| -h, --help | output usage information |  
 
+### Version
+
+`recursi version <options>`
+
+| Option | Description |
+|-------:|:------------|
+| --set-version <version> | the version to set - must use the semantic scheme |
+| --exclude \<dirs\> | comma separated list of directories to exclude |  
+| --start-dir \<dir\> | the directory to start in |  
+| -h, --help | output usage information |  
 
 Todo:
-- build
-- test
-- version
+- add access to default args for npm commands
+- build command
+- custom commands
+- test command

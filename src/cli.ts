@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import program, { Command } from 'commander';
 import { version } from './app-version.json';
-import { audit, install } from './commands';
+import * as commands from './commands';
 
 program.version(version);
 
@@ -30,7 +30,7 @@ const auditCommand = program
     .option('--fix', 'attempt to automatically fix errors', false)
     .action(function({ auditLevel, exclude, fix, startDir }: Command) {
         const excludes = parseExcludes(exclude);
-        audit({ auditLevel, excludes, fix, startDir });
+        commands.audit({ auditLevel, excludes, fix, startDir });
     });
 
 setBaseOptions(auditCommand);
@@ -42,9 +42,21 @@ const installCommand = program
     .option('--clean', 'removes package locks and node modules before installing')
     .action(function({ clean, exclude, startDir }: Command) {
         const excludes = parseExcludes(exclude);
-        install({ clean, excludes, startDir });
+        commands.install({ clean, excludes, startDir });
     });
 
 setBaseOptions(installCommand);
+
+// INSTALL
+const versionCommand = program
+    .command('version')
+    .description('recursively sets the version of all the package files it finds')
+    .requiredOption('--set-version <version>', 'the version to set - must use the semantic scheme')
+    .action(function({ setVersion, exclude, startDir }: Command) {
+        const excludes = parseExcludes(exclude);
+        commands.version({ setVersion, excludes, startDir });
+    });
+
+setBaseOptions(versionCommand);
 
 program.parse(process.argv);
