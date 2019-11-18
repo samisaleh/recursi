@@ -2,7 +2,7 @@
 
 ## A recursive CLI tool for NPM
 
-Note: this tool is not currently published - to use install the source run `npm install` and `npm link`
+Note: this tool is not currently published - to use install the source run `npm install`, `npm run build` and `npm link`
 
 ### Audit
 

@@ -3,6 +3,7 @@
   "version": "0.1.1",
   "description": "",
   "scripts": {
+    "build": "rimraf dist && tsc",
     "lint": "eslint **/*.ts --fix",
     "set-version": "node ./build/set-version.js",
     "watch": "tsc -w"
