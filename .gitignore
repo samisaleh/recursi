@@ -168,7 +168,7 @@ typings/
 # nuxt.js build output
 .nuxt
 
-# react / gatsby 
+# react / gatsby
 public/
 
 # vuepress build output
@@ -197,5 +197,4 @@ public/
 # End of https://www.gitignore.io/api/node,intellij,visualstudiocode
 
 ## RECURSI CONFIGS
-dist
 examples/**/package-lock.json
